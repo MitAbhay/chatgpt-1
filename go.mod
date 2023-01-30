@@ -1,0 +1,3 @@
+module github.com/chatgpt-1
+
+go 1.19
