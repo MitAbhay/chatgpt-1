@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"context"
 	"log"
 	"github.com/joho/godotenv"
@@ -19,4 +20,18 @@ func main() {
 
 	cntxt := context.Background()
 	client := gpt3.NewClient(apiKey)
-}
+
+	resp , err := client.Completion(cntxt, gpt3.CompletionRequest{
+            Prompt: []string{"My name is"},
+			MaxTokens: gpt3.IntPtr(30),
+			Stop: []string{"."},
+			Echo: true,
+	})
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	fmt.Println(resp.Choices[0].Text)
+
+} 
